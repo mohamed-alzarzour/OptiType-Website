@@ -1,0 +1,252 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { languages, useTranslations } from '../../i18n/ui';
+export function getStaticPaths(){return Object.keys(languages).map(l=>({params:{lang:l}}));}
+const {lang}=Astro.params; const t=useTranslations(lang as any);
+---
+<Layout title="OptiType — Type with Your Eyes">
+
+<!-- HERO -->
+<section class="relative min-h-[92vh] flex items-center overflow-hidden">
+	<!-- Data flow lines -->
+	<div class="absolute inset-0 pointer-events-none overflow-hidden">
+		<div class="data-line" style="left:10%;height:40%;animation-delay:0s;animation-duration:6s"></div>
+		<div class="data-line" style="left:25%;height:30%;animation-delay:2s;animation-duration:8s"></div>
+		<div class="data-line" style="left:50%;height:50%;animation-delay:1s;animation-duration:7s"></div>
+		<div class="data-line" style="left:75%;height:35%;animation-delay:3s;animation-duration:9s"></div>
+		<div class="data-line" style="left:90%;height:45%;animation-delay:4s;animation-duration:6.5s"></div>
+	</div>
+
+	<div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+		<div>
+			<div class="a-up inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass text-sm font-medium mb-8">
+				<span class="relative flex h-2 w-2"><span class="animate-ping absolute h-full w-full rounded-full opacity-75" style="background:var(--c-green)"></span><span class="relative rounded-full h-2 w-2" style="background:var(--c-green)"></span></span>
+				<span style="color:var(--c-text2)">{t('hero.badge')}</span>
+			</div>
+			<h1 class="a-up-1 text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.05] tracking-tight mb-8">
+				<span style="color:var(--c-text)">{t('hero.title1')}</span><br/>
+				<span class="text-grad-anim">{t('hero.title2')}</span>
+			</h1>
+			<p class="a-up-2 text-lg leading-relaxed mb-10 max-w-lg" style="color:var(--c-text2)">
+				{t('hero.desc')}
+			</p>
+			<div class="a-up-3 flex flex-wrap gap-4">
+				<a href={`/${lang}/download`} class="group px-7 py-4 bg-gradient-to-r from-blue to-green text-white rounded-2xl font-bold transition-all duration-300 hover:shadow-[0_8px_40px_rgba(24,160,248,0.35)] hover:-translate-y-1 flex items-center gap-2">
+					{t('hero.cta')}
+					<svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+				</a>
+				<a href={`/${lang}/docs`} class="px-7 py-4 glass rounded-2xl font-bold transition-all duration-300 hover:-translate-y-1" style="color:var(--c-text)">{t('hero.docs')}</a>
+			</div>
+		</div>
+
+		<!-- Interactive Eye -->
+		<div class="a-up-2 hidden lg:flex justify-center items-center relative">
+			<div class="a-float">
+				<div class="eye-container" id="eye-vis">
+					<div class="eye-ring"></div>
+					<div class="eye-ring eye-ring-2"></div>
+					<div class="eye-outer">
+						<div class="eye-iris" id="eye-iris">
+							<div class="eye-pupil">
+								<div class="eye-highlight"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Floating labels -->
+			<div class="absolute -top-4 -right-4 glass rounded-xl px-3 py-2 text-xs font-mono a-up-4" style="color:var(--c-text2)">
+				<span style="color:var(--c-blue)">●</span> {t('hero.tracking')}
+			</div>
+			<div class="absolute -bottom-4 -left-4 glass rounded-xl px-3 py-2 text-xs font-mono a-up-4" style="color:var(--c-text2)">
+				CONF: <span style="color:var(--c-green)">97.25%</span>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- TYPING DEMO -->
+<section class="py-6 rv">
+	<div class="max-w-3xl mx-auto px-5">
+		<div class="glass rounded-2xl px-6 py-5 flex items-center gap-4">
+			<div class="w-3 h-3 rounded-full animate-pulse shrink-0" style="background:var(--c-green)"></div>
+			<div class="font-mono text-base md:text-lg flex-1 min-h-[1.5em]" style="color:var(--c-text)">
+				<span id="typed-text"></span><span style="color:var(--c-blue);animation:blink 1s step-end infinite">|</span>
+			</div>
+			<span class="text-xs font-mono hidden sm:block" style="color:var(--c-text3)">{t('demo.label')}</span>
+		</div>
+	</div>
+</section>
+
+<!-- STATS -->
+<section class="py-20 rv">
+	<div class="max-w-5xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-5 stg">
+		<div class="tilt glass rounded-2xl p-6 text-center">
+			<div class="text-4xl font-black text-grad mb-1">97%+</div>
+			<div class="text-xs font-bold tracking-widest uppercase" style="color:var(--c-text3)">{t('stats.accuracy')}</div>
+		</div>
+		<div class="tilt glass rounded-2xl p-6 text-center">
+			<div class="text-4xl font-black mb-1" style="color:var(--c-text)">5</div>
+			<div class="text-xs font-bold tracking-widest uppercase" style="color:var(--c-text3)">{t('stats.models')}</div>
+		</div>
+		<div class="tilt glass rounded-2xl p-6 text-center">
+			<div class="text-4xl font-black mb-1" style="color:var(--c-text)">6</div>
+			<div class="text-xs font-bold tracking-widest uppercase" style="color:var(--c-text3)">{t('stats.zones')}</div>
+		</div>
+		<div class="tilt glass rounded-2xl p-6 text-center">
+			<div class="text-4xl font-black mb-1" style="color:var(--c-blue)">&lt;50ms</div>
+			<div class="text-xs font-bold tracking-widest uppercase" style="color:var(--c-text3)">{t('stats.latency')}</div>
+		</div>
+	</div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="py-24">
+	<div class="max-w-6xl mx-auto px-5">
+		<div class="text-center mb-20 rv">
+			<p class="text-xs font-bold tracking-[0.2em] uppercase mb-4" style="color:var(--c-blue)">{t('how.label')}</p>
+			<h2 class="text-3xl md:text-5xl font-black mb-4" style="color:var(--c-text)">{t('how.title')}</h2>
+			<p class="max-w-lg mx-auto" style="color:var(--c-text2)">{t('how.desc')}</p>
+		</div>
+		<div class="grid md:grid-cols-4 gap-5 stg rv relative">
+			<div class="hidden md:block absolute top-14 left-[12%] right-[12%] h-px bg-gradient-to-r from-blue via-cyan to-green opacity-20"></div>
+			<div class="tilt glass rounded-2xl p-7 text-center relative z-10 group">
+				<div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform" style="background:rgba(24,160,248,0.1);border:1px solid rgba(24,160,248,0.2)">
+					<svg class="w-6 h-6" style="color:var(--c-blue)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+				</div>
+				<h3 class="font-bold mb-2" style="color:var(--c-text)">{t('how.s1')}</h3>
+				<p class="text-sm" style="color:var(--c-text2)">{t('how.s1d')}</p>
+			</div>
+			<div class="tilt glass rounded-2xl p-7 text-center relative z-10 group">
+				<div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform" style="background:rgba(65,207,110,0.1);border:1px solid rgba(65,207,110,0.2)">
+					<svg class="w-6 h-6" style="color:var(--c-green)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+				</div>
+				<h3 class="font-bold mb-2" style="color:var(--c-text)">{t('how.s2')}</h3>
+				<p class="text-sm" style="color:var(--c-text2)">{t('how.s2d')}</p>
+			</div>
+			<div class="tilt glass rounded-2xl p-7 text-center relative z-10 group">
+				<div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform" style="background:rgba(24,160,248,0.1);border:1px solid rgba(24,160,248,0.2)">
+					<svg class="w-6 h-6" style="color:var(--c-blue)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+				</div>
+				<h3 class="font-bold mb-2" style="color:var(--c-text)">{t('how.s3')}</h3>
+				<p class="text-sm" style="color:var(--c-text2)">{t('how.s3d')}</p>
+			</div>
+			<div class="tilt glass rounded-2xl p-7 text-center relative z-10 group">
+				<div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform" style="background:rgba(65,207,110,0.1);border:1px solid rgba(65,207,110,0.2)">
+					<svg class="w-6 h-6" style="color:var(--c-green)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+				</div>
+				<h3 class="font-bold mb-2" style="color:var(--c-text)">{t('how.s4')}</h3>
+				<p class="text-sm" style="color:var(--c-text2)">{t('how.s4d')}</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- FEATURES -->
+<section class="py-24">
+	<div class="max-w-6xl mx-auto px-5">
+		<div class="text-center mb-16 rv">
+			<p class="text-xs font-bold tracking-[0.2em] uppercase mb-4" style="color:var(--c-green)">{t('feat.label')}</p>
+			<h2 class="text-3xl md:text-5xl font-black mb-4" style="color:var(--c-text)">{t('feat.title')}</h2>
+		</div>
+		<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 stg rv">
+			<div class="tilt glass rounded-2xl p-6 group"><div class="text-2xl mb-3">🎯</div><h3 class="font-bold mb-2 group-hover:text-grad transition-colors" style="color:var(--c-text)">{t('feat.1')}</h3><p class="text-sm" style="color:var(--c-text2)">{t('feat.1d')}</p></div>
+			<div class="tilt glass rounded-2xl p-6 group"><div class="text-2xl mb-3">🧠</div><h3 class="font-bold mb-2 group-hover:text-grad transition-colors" style="color:var(--c-text)">{t('feat.2')}</h3><p class="text-sm" style="color:var(--c-text2)">{t('feat.2d')}</p></div>
+			<div class="tilt glass rounded-2xl p-6 group"><div class="text-2xl mb-3">📊</div><h3 class="font-bold mb-2 group-hover:text-grad transition-colors" style="color:var(--c-text)">{t('feat.3')}</h3><p class="text-sm" style="color:var(--c-text2)">{t('feat.3d')}</p></div>
+			<div class="tilt glass rounded-2xl p-6 group"><div class="text-2xl mb-3">🔒</div><h3 class="font-bold mb-2 group-hover:text-grad transition-colors" style="color:var(--c-text)">{t('feat.4')}</h3><p class="text-sm" style="color:var(--c-text2)">{t('feat.4d')}</p></div>
+			<div class="tilt glass rounded-2xl p-6 group"><div class="text-2xl mb-3">⚙️</div><h3 class="font-bold mb-2 group-hover:text-grad transition-colors" style="color:var(--c-text)">{t('feat.5')}</h3><p class="text-sm" style="color:var(--c-text2)">{t('feat.5d')}</p></div>
+			<div class="tilt glass rounded-2xl p-6 group"><div class="text-2xl mb-3">💻</div><h3 class="font-bold mb-2 group-hover:text-grad transition-colors" style="color:var(--c-text)">{t('feat.6')}</h3><p class="text-sm" style="color:var(--c-text2)">{t('feat.6d')}</p></div>
+			<div class="tilt glass rounded-2xl p-6 group"><div class="text-2xl mb-3">👥</div><h3 class="font-bold mb-2 group-hover:text-grad transition-colors" style="color:var(--c-text)">{t('feat.7')}</h3><p class="text-sm" style="color:var(--c-text2)">{t('feat.7d')}</p></div>
+			<div class="tilt glass rounded-2xl p-6 group"><div class="text-2xl mb-3">📈</div><h3 class="font-bold mb-2 group-hover:text-grad transition-colors" style="color:var(--c-text)">{t('feat.8')}</h3><p class="text-sm" style="color:var(--c-text2)">{t('feat.8d')}</p></div>
+		</div>
+	</div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="py-28">
+	<div class="max-w-6xl mx-auto px-5 space-y-32">
+		<div class="flex flex-col lg:flex-row items-center gap-16">
+			<div class="flex-1 rv-l">
+				<p class="text-xs font-bold tracking-[0.2em] uppercase mb-4" style="color:var(--c-blue)">{t('show.analytics.label')}</p>
+				<h2 class="text-3xl md:text-4xl font-black mb-6" style="color:var(--c-text)">{t('show.analytics.title')}</h2>
+				<p class="mb-8 leading-relaxed" style="color:var(--c-text2)">{t('show.analytics.desc')}</p>
+				<div class="space-y-3">
+					<div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(65,207,110,0.15)"><svg class="w-3 h-3" style="color:var(--c-green)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div><span class="text-sm" style="color:var(--c-text)">{t('show.analytics.f1')}</span></div>
+					<div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(65,207,110,0.15)"><svg class="w-3 h-3" style="color:var(--c-green)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div><span class="text-sm" style="color:var(--c-text)">{t('show.analytics.f2')}</span></div>
+					<div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(65,207,110,0.15)"><svg class="w-3 h-3" style="color:var(--c-green)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div><span class="text-sm" style="color:var(--c-text)">{t('show.analytics.f3')}</span></div>
+				</div>
+			</div>
+			<div class="flex-1 w-full rv-r">
+				<div class="tilt scanl rounded-2xl p-3 shadow-[0_20px_60px_rgba(0,0,0,0.3)]" style="background:var(--c-bg2);border:1px solid var(--c-border)">
+					<img src="/images/screenshots/settings.png" alt="Settings" class="rounded-xl" style="border:1px solid var(--c-border)" />
+				</div>
+			</div>
+		</div>
+		<div class="flex flex-col lg:flex-row-reverse items-center gap-16">
+			<div class="flex-1 rv-r">
+				<p class="text-xs font-bold tracking-[0.2em] uppercase mb-4" style="color:var(--c-green)">{t('show.grid.label')}</p>
+				<h2 class="text-3xl md:text-4xl font-black mb-6" style="color:var(--c-text)">{t('show.grid.title')}</h2>
+				<p class="leading-relaxed" style="color:var(--c-text2)">{t('show.grid.desc')}</p>
+			</div>
+			<div class="flex-1 w-full rv-l">
+				<div class="tilt scanl rounded-2xl p-3 shadow-[0_20px_60px_rgba(0,0,0,0.3)]" style="background:var(--c-bg2);border:1px solid var(--c-border)">
+					<img src="/images/screenshots/typing_interface.png" alt="Typing" class="rounded-xl" style="border:1px solid var(--c-border)" />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- TECH -->
+<section class="py-14 rv" style="border-top:1px solid var(--c-border);border-bottom:1px solid var(--c-border)">
+	<div class="max-w-4xl mx-auto px-5 text-center">
+		<p class="text-xs font-bold tracking-[0.2em] uppercase mb-6" style="color:var(--c-text3)">{t('tech.label')}</p>
+		<div class="flex flex-wrap justify-center gap-x-10 gap-y-3" style="color:var(--c-text2)">
+			<span>🐍 Python</span><span>👁️ MediaPipe</span><span>📷 OpenCV</span><span>🧠 scikit-learn</span><span>🔢 NumPy</span>
+		</div>
+	</div>
+</section>
+
+<!-- CTA -->
+<section class="py-28 rv">
+	<div class="max-w-3xl mx-auto px-5">
+		<div class="glass rounded-3xl p-12 md:p-16 text-center relative overflow-hidden group">
+			<div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style="background:linear-gradient(135deg,rgba(24,160,248,0.05),rgba(65,207,110,0.05))"></div>
+			<h2 class="text-3xl md:text-4xl font-black mb-4 relative z-10" style="color:var(--c-text)">{t('cta.title')}</h2>
+			<p class="mb-10 max-w-md mx-auto relative z-10" style="color:var(--c-text2)">{t('cta.desc')}</p>
+			<a href={`/${lang}/download`} class="relative z-10 inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue to-green text-white rounded-2xl font-bold hover:shadow-[0_8px_40px_rgba(24,160,248,0.35)] hover:-translate-y-1 transition-all duration-300">
+				Get Started <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+			</a>
+		</div>
+	</div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+	// Typing effect
+	const el=document.getElementById('typed-text');
+	if(!el)return;
+	const ph=['Hello, I am typing with my eyes!','No special hardware needed.','97.25% accuracy with any webcam.','OptiType — free and open source.'];
+	let pi=0,ci=0,dl=false;
+	function tk(){const p=ph[pi];if(!dl){el.textContent=p.substring(0,ci+1);ci++;if(ci>=p.length){dl=true;setTimeout(tk,2200);return;}setTimeout(tk,55+Math.random()*35);}else{el.textContent=p.substring(0,ci);ci--;if(ci<0){dl=false;ci=0;pi=(pi+1)%ph.length;setTimeout(tk,400);return;}setTimeout(tk,25);}}
+	setTimeout(tk,800);
+
+	// Eye tracking cursor
+	const iris=document.getElementById('eye-iris');
+	if(!iris)return;
+	const eye=document.getElementById('eye-vis');
+	document.addEventListener('mousemove',e=>{
+		if(!eye)return;
+		const r=eye.getBoundingClientRect();
+		const cx=r.left+r.width/2, cy=r.top+r.height/2;
+		const dx=e.clientX-cx, dy=e.clientY-cy;
+		const dist=Math.sqrt(dx*dx+dy*dy);
+		const maxMove=30;
+		const move=Math.min(dist/8,maxMove);
+		const angle=Math.atan2(dy,dx);
+		const ix=Math.cos(angle)*move, iy=Math.sin(angle)*move;
+		iris.style.transform=`translate(calc(-50% + ${ix}px), calc(-50% + ${iy}px))`;
+	});
+});
+</script>
+</Layout>

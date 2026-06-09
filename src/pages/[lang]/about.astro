@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { languages, useTranslations } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+---
+
+<Layout title={`OptiType - ${t('nav.about')}`}>
+	<div class="max-w-4xl mx-auto py-12 a-up">
+		
+		<!-- Header -->
+		<div class="text-center mb-16">
+			<div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-cyan/10 text-brand-cyan mb-6">
+				<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+			</div>
+			<h1 class="text-4xl md:text-5xl font-extrabold  mb-6 tracking-tight">{t('about.title')}</h1>
+			<p class="text-xl  max-w-2xl mx-auto leading-relaxed">
+				{t('about.text')}
+			</p>
+		</div>
+
+		<!-- Problem & Solution Cards -->
+		<div class="grid md:grid-cols-2 gap-6 mb-16">
+			<!-- Problem -->
+			<div class="glass  p-8 rounded-3xl relative overflow-hidden group">
+				<div class="absolute top-0 right-0 p-6 text-brand-red opacity-20 group-hover:opacity-100 transition-opacity">
+					<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+				</div>
+				<h2 class="text-2xl font-bold  mb-4">The Problem</h2>
+				<p class=" leading-relaxed relative z-10">
+					Current assistive typing solutions often require expensive specialized hardware (costing $5,000–$15,000) or rely on external sensors that are impractical for everyday use. This creates a massive accessibility gap for those who need it most.
+				</p>
+			</div>
+
+			<!-- Solution -->
+			<div class="glass border border-brand-cyan/30 p-8 rounded-3xl relative overflow-hidden group shadow-[0_0_30px_rgba(40,180,230,0.05)]">
+				<div class="absolute top-0 right-0 p-6 text-brand-cyan opacity-20 group-hover:opacity-100 transition-opacity transform group-hover:scale-110">
+					<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+				</div>
+				<h2 class="text-2xl font-bold  mb-4">The Solution</h2>
+				<p class=" leading-relaxed relative z-10">
+					OptiType is an affordable, software-only, gaze-based typing system that works with any standard webcam. It uses advanced computer vision and machine learning to translate eye movements into text instantly.
+				</p>
+			</div>
+		</div>
+
+		<!-- Project Details Box (Mimicking the App's UI style) -->
+		<div class="glass  rounded-3xl p-8 relative">
+			<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-cyan via-brand-cyan to-transparent rounded-t-3xl opacity-50"></div>
+			<h3 class="font-bold text-2xl  mb-8">Graduation Project Details</h3>
+			
+			<div class="space-y-6">
+				<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 pb-6 border-b border-bdr/50">
+					<div class="w-32  font-mono text-sm uppercase tracking-wider">Developer</div>
+					<div class=" font-medium text-lg">Mohamed Alzarzour <span class=" text-sm ml-2 font-mono bg-bg-dark px-2 py-1 rounded">2110202531</span></div>
+				</div>
+				
+				<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 pb-6 border-b border-bdr/50">
+					<div class="w-32  font-mono text-sm uppercase tracking-wider">Supervisor</div>
+					<a href="https://unis.karabuk.edu.tr/akademisyen/ammarmohammed" target="_blank" class="text-brand-cyan font-medium text-lg hover:opacity-70 transition-opacity">Dr.Öğr.Üyesi Ammar Mohammed Ali Al-Qadasi <svg class="w-3.5 h-3.5 inline-block ml-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+				</div>
+				
+				<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 pb-6 border-b border-bdr/50">
+					<div class="w-32  font-mono text-sm uppercase tracking-wider">Department</div>
+					<a href="https://bbf.karabuk.edu.tr/bilgisayar" target="_blank" class="font-medium text-lg hover:text-brand-cyan transition-colors" style="color:var(--c-text)">Computer Engineering <svg class="w-3.5 h-3.5 inline-block ml-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+				</div>
+
+				<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+					<div class="w-32  font-mono text-sm uppercase tracking-wider">University</div>
+					<div class="flex items-center gap-3">
+						<div class="w-8 h-8 bg-white/5 rounded-full flex items-center justify-center text-xs">🏛️</div>
+						<a href="https://www.karabuk.edu.tr" target="_blank" class="font-medium text-lg hover:text-brand-cyan transition-colors" style="color:var(--c-text)">Karabük University <svg class="w-3.5 h-3.5 inline-block ml-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</Layout>

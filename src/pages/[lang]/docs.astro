@@ -1,0 +1,339 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { languages, useTranslations } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+---
+
+<Layout title={`OptiType - ${t('nav.docs')}`}>
+	<div class="max-w-5xl mx-auto py-12 a-up">
+		
+		<div class="mb-12 border-b border-bdr pb-8">
+			<h1 class="text-4xl font-extrabold  mb-4">{t('docs.title')}</h1>
+			<p class="text-xl ">{t('docs.subtitle')}</p>
+		</div>
+		
+		<div class="grid md:grid-cols-12 gap-12">
+			<!-- Sidebar -->
+			<div class="md:col-span-3 order-last md:order-first">
+				<div class="sticky top-28 glass  rounded-2xl p-5">
+					<h3 class="text-xs font-bold uppercase tracking-wider  mb-4">Contents</h3>
+					<ul class="space-y-2 text-sm font-medium">
+						<li><a href="#installation" class=" hover:text-blue transition-colors block py-1">1. Installation</a></li>
+						<li><a href="#first-launch" class=" hover:text-blue transition-colors block py-1">2. First Launch</a></li>
+						<li><a href="#typing" class=" hover:text-blue transition-colors block py-1">3. How to Type</a></li>
+						<li><a href="#calibration" class=" hover:text-blue transition-colors block py-1">4. Calibration</a></li>
+						<li><a href="#settings" class=" hover:text-blue transition-colors block py-1">5. Settings</a></li>
+						<li><a href="#history" class=" hover:text-blue transition-colors block py-1">6. Training History</a></li>
+						<li><a href="#troubleshooting" class=" hover:text-blue transition-colors block py-1">7. Troubleshooting</a></li>
+						<li class="pt-2 border-t border-bdr mt-2">
+							<span class="text-xs  uppercase tracking-wider">Technical</span>
+						</li>
+						<li><a href="#architecture" class=" hover:text-blue transition-colors block py-1">8. Architecture</a></li>
+						<li><a href="#ml-pipeline" class=" hover:text-blue transition-colors block py-1">9. ML Pipeline</a></li>
+						<li><a href="#features" class=" hover:text-blue transition-colors block py-1">10. Feature Engineering</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Content -->
+			<div class="md:col-span-9 prose prose-invert prose-lg max-w-none prose-headings: prose-a:text-blue">
+				
+				<!-- 1. Installation -->
+				<h2 id="installation" class="scroll-mt-28 flex items-center gap-3">
+					<span class="w-8 h-8 rounded-full bg-blue/20 text-blue flex items-center justify-center text-sm shrink-0">1</span>
+					Installation
+				</h2>
+				<p>OptiType is fully portable. You do <strong>not</strong> need Python, OpenCV, or any ML libraries installed.</p>
+				
+				<div class="glass  rounded-xl p-6 my-6">
+					<h4 class=" font-bold mt-0">Linux — AppImage (Recommended)</h4>
+					<ol class="mb-0">
+						<li>Download the <code>.AppImage</code> file from the <a href={`/${lang}/download`}>Download page</a>.</li>
+						<li>Make it executable: <code>chmod +x OptiType-x86_64.AppImage</code></li>
+						<li>Double-click or run: <code>./OptiType-x86_64.AppImage</code></li>
+					</ol>
+				</div>
+				<div class="glass  rounded-xl p-6 my-6">
+					<h4 class=" font-bold mt-0">Linux — Debian Package (.deb)</h4>
+					<ol class="mb-0">
+						<li>Install: <code>sudo dpkg -i optitype_7.0.0_amd64.deb</code></li>
+						<li>Launch from your application menu or run: <code>optitype</code></li>
+					</ol>
+				</div>
+				<div class="glass  rounded-xl p-6 my-6">
+					<h4 class=" font-bold mt-0">Windows — Installer (.exe)</h4>
+					<ol class="mb-0">
+						<li>Run <code>OptiType_Setup.exe</code> and follow the wizard.</li>
+						<li>Launch from the Start Menu or Desktop shortcut.</li>
+					</ol>
+				</div>
+				<p><strong>Requirements:</strong> Standard webcam, 4GB RAM, 500MB disk space. No internet needed after install.</p>
+
+				<hr class="border-bdr my-12" />
+
+				<!-- 2. First Launch -->
+				<h2 id="first-launch" class="scroll-mt-28 flex items-center gap-3">
+					<span class="w-8 h-8 rounded-full bg-blue/20 text-blue flex items-center justify-center text-sm shrink-0">2</span>
+					First Launch
+				</h2>
+				<p>When you first open OptiType, you'll see the <strong>Main Menu</strong> with four options:</p>
+				<ul>
+					<li><strong>Start Typing</strong> — Opens the 6-zone gaze-based keyboard.</li>
+					<li><strong>Improve Accuracy</strong> — Collects calibration data and retrains your model.</li>
+					<li><strong>Training History</strong> — Review and manage past calibration sessions.</li>
+					<li><strong>Settings</strong> — Configure camera, model, dwell time, and more.</li>
+				</ul>
+				<p>Navigate with <kbd>↑</kbd>/<kbd>↓</kbd> arrow keys and press <kbd>Enter</kbd> to select. Press <kbd>Esc</kbd> to go back at any time.</p>
+				<p>The status bar at the bottom shows: <em>Camera status</em> and <em>Active model + accuracy</em>.</p>
+
+				<hr class="border-bdr my-12" />
+
+				<!-- 3. How to Type -->
+				<h2 id="typing" class="scroll-mt-28 flex items-center gap-3">
+					<span class="w-8 h-8 rounded-full bg-blue/20 text-blue flex items-center justify-center text-sm shrink-0">3</span>
+					How to Type
+				</h2>
+				<p>The screen is divided into <strong>6 zones</strong> (2 rows × 3 columns). Each zone contains a group of letters:</p>
+				<div class="glass  rounded-xl p-6 my-6 font-mono text-center">
+					<div class="grid grid-cols-3 gap-2 text-sm">
+						<div class="glass p-3 rounded-lg"><strong>TL</strong><br/>A B C D E F</div>
+						<div class="glass p-3 rounded-lg"><strong>TM</strong><br/>G H I J K L</div>
+						<div class="glass p-3 rounded-lg"><strong>TR</strong><br/>M N O P Q R</div>
+						<div class="glass p-3 rounded-lg"><strong>BL</strong><br/>S T U V W X</div>
+						<div class="glass p-3 rounded-lg"><strong>BM</strong><br/>Y Z ␣ ⌫ . ,</div>
+						<div class="glass p-3 rounded-lg"><strong>BR</strong><br/>123 #$ (symbols)</div>
+					</div>
+				</div>
+				<h4 class="">Step-by-step:</h4>
+				<ol>
+					<li><strong>Look at the zone</strong> containing the letter you want.</li>
+					<li><strong>Hold your gaze</strong> — a progress bar fills up over the dwell time (default: 1.8s).</li>
+					<li>The zone expands to show individual letters.</li>
+					<li><strong>Look at the specific letter</strong> and dwell again to type it.</li>
+				</ol>
+				<h4 class="">Interface Elements:</h4>
+				<ul>
+					<li><strong>OUTPUT bar</strong> (top) — Shows your typed text and character count.</li>
+					<li><strong>DWELL bar</strong> (bottom-left) — Progress of your current gaze hold.</li>
+					<li><strong>GAZE indicator</strong> (bottom-right) — Current detected zone (e.g., <code>GAZE: TM</code>).</li>
+					<li><strong>CONF indicator</strong> — Model confidence percentage. Green (&gt;60%), Yellow (&gt;40%), Red (&lt;40%).</li>
+					<li><strong>Face camera</strong> — Live webcam feed showing face detection status.</li>
+				</ul>
+				<h4 class="">Keyboard Shortcuts:</h4>
+				<ul>
+					<li><kbd>ESC</kbd> — Exit typing mode</li>
+					<li><kbd>C</kbd> — Clear all typed text</li>
+					<li><kbd>+</kbd> / <kbd>-</kbd> — Increase / decrease dwell speed</li>
+				</ul>
+
+				<hr class="border-bdr my-12" />
+
+				<!-- 4. Calibration -->
+				<h2 id="calibration" class="scroll-mt-28 flex items-center gap-3">
+					<span class="w-8 h-8 rounded-full bg-blue/20 text-blue flex items-center justify-center text-sm shrink-0">4</span>
+					Calibration (Improve Accuracy)
+				</h2>
+				<p>Every person's eye shape, lighting, and camera angle is unique. Calibration personalizes the ML model to <em>your</em> gaze patterns.</p>
+				<ol>
+					<li>Select <strong>Improve Accuracy</strong> from the main menu.</li>
+					<li>A <strong>yellow target circle</strong> appears in one of the 6 zones.</li>
+					<li>Look directly at the target. Keep your head still — <em>only move your eyes</em>.</li>
+					<li>The system collects gaze samples at each position (typically 50 per zone, 300 total).</li>
+					<li>After collection, the system <strong>evaluates data quality</strong> automatically.</li>
+					<li>If accepted, your model is <strong>retrained immediately</strong> with the new data.</li>
+				</ol>
+				<div class="glass p-4 rounded-lg  border-l-4 border-l-brand-green my-6">
+					<h4 class="font-bold  mt-0">Tips for Best Calibration</h4>
+					<ul class="mb-0 text-sm">
+						<li>Sit at a comfortable distance (50–80 cm from screen).</li>
+						<li>Ensure even, front-facing lighting — avoid backlighting.</li>
+						<li>Remove glasses if they cause severe glare.</li>
+						<li>Stay still during collection. Only your eyes should move.</li>
+						<li>Multiple calibration sessions stack — more data = better accuracy.</li>
+					</ul>
+				</div>
+
+				<hr class="border-bdr my-12" />
+
+				<!-- 5. Settings -->
+				<h2 id="settings" class="scroll-mt-28 flex items-center gap-3">
+					<span class="w-8 h-8 rounded-full bg-blue/20 text-blue flex items-center justify-center text-sm shrink-0">5</span>
+					Settings Reference
+				</h2>
+				<p>Every setting in OptiType, explained:</p>
+
+				<div class="space-y-4 my-6">
+					<div class="glass p-5 rounded-xl ">
+						<h4 class=" font-bold mt-0 mb-1">Camera Index</h4>
+						<p class="text-sm  mb-2">Default: <code>0</code> — Selects which webcam to use if you have multiple cameras. Use <strong>Refresh Camera</strong> to detect newly connected cameras.</p>
+					</div>
+					<div class="glass p-5 rounded-xl ">
+						<h4 class=" font-bold mt-0 mb-1">Model</h4>
+						<p class="text-sm  mb-2">Default: <code>MLP (97.25%)</code> — Choose between 5 ML algorithms: <strong>MLP</strong> (Neural Network), <strong>SVM</strong> (Support Vector Machine), <strong>KNN</strong> (K-Nearest Neighbors), <strong>RF</strong> (Random Forest), <strong>GB</strong> (Gradient Boosting). The percentage shows cross-validated accuracy.</p>
+					</div>
+					<div class="glass p-5 rounded-xl ">
+						<h4 class=" font-bold mt-0 mb-1">Dwell Time</h4>
+						<p class="text-sm  mb-2">Default: <code>1.8 seconds</code> — How long you must hold your gaze on a zone before it triggers. Lower = faster typing but more accidental selections. Range: 0.5–5.0s.</p>
+					</div>
+					<div class="glass p-5 rounded-xl ">
+						<h4 class=" font-bold mt-0 mb-1">Confidence Threshold</h4>
+						<p class="text-sm  mb-2">Default: <code>0.40</code> — Minimum model confidence required to register a gaze prediction. Predictions below this threshold are ignored. Higher = fewer false detections but may feel unresponsive.</p>
+					</div>
+					<div class="glass p-5 rounded-xl ">
+						<h4 class=" font-bold mt-0 mb-1">Smoothing Window</h4>
+						<p class="text-sm  mb-2">Default: <code>7 frames</code> — Number of consecutive predictions to average using majority voting. Higher values = smoother, less jittery cursor but slightly slower response. Range: 3–15.</p>
+					</div>
+					<div class="glass p-5 rounded-xl ">
+						<h4 class=" font-bold mt-0 mb-1">Cooldown</h4>
+						<p class="text-sm  mb-2">Default: <code>1.2 seconds</code> — Pause after each successful selection to prevent accidental double-triggers. Range: 0.3–3.0s.</p>
+					</div>
+				</div>
+
+				<hr class="border-bdr my-12" />
+
+				<!-- 6. Training History -->
+				<h2 id="history" class="scroll-mt-28 flex items-center gap-3">
+					<span class="w-8 h-8 rounded-full bg-blue/20 text-blue flex items-center justify-center text-sm shrink-0">6</span>
+					Training History
+				</h2>
+				<p>View all past calibration sessions. Each entry shows:</p>
+				<ul>
+					<li><strong>Date/Time</strong> — When the session was recorded.</li>
+					<li><strong>Samples</strong> — Number of gaze samples collected.</li>
+					<li><strong>Quality Score</strong> — Automated data quality assessment (0.0–1.0). Labels: Poor (&lt;0.5), Fair (0.5–0.7), Good (0.7–0.9), Excellent (&gt;0.9).</li>
+					<li><strong>Accuracy Impact</strong> — How much this session improved (or degraded) model accuracy.</li>
+					<li><strong>Model</strong> — Which algorithm was used for retraining.</li>
+					<li><strong>Status</strong> — Active (included in training) or Removed (excluded).</li>
+				</ul>
+				<p>Press <kbd>D</kbd> to toggle Delete/Restore a session. Removed sessions are excluded from future retraining.</p>
+
+				<hr class="border-bdr my-12" />
+
+				<!-- 7. Troubleshooting -->
+				<h2 id="troubleshooting" class="scroll-mt-28 flex items-center gap-3">
+					<span class="w-8 h-8 rounded-full bg-blue/20 text-blue flex items-center justify-center text-sm shrink-0">7</span>
+					Troubleshooting
+				</h2>
+				<div class="space-y-4">
+					<div class="glass p-4 rounded-lg  border-l-4 border-l-red-500">
+						<h4 class="font-bold  mt-0">Camera not detected</h4>
+						<p class="text-sm mb-0">Go to Settings → Camera and click Refresh. Ensure no other app (Zoom, Teams, OBS) is using the webcam. On Linux, check permissions: <code>ls -la /dev/video*</code></p>
+					</div>
+					<div class="glass p-4 rounded-lg  border-l-4 border-l-yellow-500">
+						<h4 class="font-bold  mt-0">Cursor jumps around / low confidence</h4>
+						<p class="text-sm mb-0">Usually caused by poor lighting (backlighting) or glasses glare. Ensure front-facing, even illumination. Increase the Smoothing Window in Settings. Recalibrate via Improve Accuracy.</p>
+					</div>
+					<div class="glass p-4 rounded-lg  border-l-4 border-l-yellow-500">
+						<h4 class="font-bold  mt-0">Typing feels too slow</h4>
+						<p class="text-sm mb-0">Decrease Dwell Time in Settings (try 1.2s). Decrease Cooldown (try 0.8s). Use <kbd>+</kbd> key during typing for quick adjustment.</p>
+					</div>
+					<div class="glass p-4 rounded-lg  border-l-4 border-l-red-500">
+						<h4 class="font-bold  mt-0">AppImage won't launch (Linux)</h4>
+						<p class="text-sm mb-0">Run <code>chmod +x OptiType-x86_64.AppImage</code>. If FUSE error: install <code>libfuse2</code> or extract with <code>--appimage-extract</code>.</p>
+					</div>
+					<div class="glass p-4 rounded-lg  border-l-4 border-l-red-500">
+						<h4 class="font-bold  mt-0">Face not detected</h4>
+						<p class="text-sm mb-0">Ensure your full face is visible and evenly lit. The camera feed in the bottom-left shows a green "OK" dot when face detection is active. Sit 50–80 cm from the camera.</p>
+					</div>
+				</div>
+
+				<hr class="border-bdr my-12" />
+
+				<!-- TECHNICAL SECTIONS -->
+				<div class="glass border border-blue/30 rounded-2xl p-6 my-8">
+					<h3 class="text-blue mt-0 text-lg">🔬 Technical Documentation</h3>
+					<p class="text-sm  mb-0">The following sections are intended for developers and technical users who want to understand the internal architecture.</p>
+				</div>
+
+				<!-- 8. Architecture -->
+				<h2 id="architecture" class="scroll-mt-28 flex items-center gap-3">
+					<span class="w-8 h-8 rounded-full bg-blue/20 text-blue flex items-center justify-center text-sm shrink-0">8</span>
+					System Architecture
+				</h2>
+				<p>OptiType follows a modular architecture with clear separation of concerns:</p>
+				<div class="glass p-5 rounded-xl  font-mono text-sm my-6 overflow-x-auto">
+					<pre class="mb-0 ">┌──────────────────────────────────────────┐
+│           eye_typer.py (Main)            │
+│  Camera → FaceMesh → Features → Model   │
+│  → Smoothing → Dwell → Text Output      │
+├──────────┬────────────┬──────────────────┤
+│ ui_theme │ gaze_      │ model_trainer.py │
+│ .py      │ collector  │ (5 algorithms)   │
+│ (Canvas) │ .py        │                  │
+├──────────┴────────────┴──────────────────┤
+│  settings.json │ models/ │ sessions/     │
+│  (USER_DATA)   │ (.pkl)  │ (.csv)        │
+└──────────────────────────────────────────┘</pre>
+				</div>
+				<ul>
+					<li><strong>eye_typer.py</strong> — Main application loop. Captures frames, runs FaceMesh, extracts features, classifies gaze zone, manages dwell-time selection, and renders the UI.</li>
+					<li><strong>ui_theme.py</strong> — Custom Canvas class wrapping PIL (text) + OpenCV (shapes). TrueType font rendering, gradients, rounded rectangles.</li>
+					<li><strong>gaze_collector.py</strong> — Data collection module for calibration. Records labeled gaze samples per zone.</li>
+					<li><strong>model_trainer.py</strong> — Trains 5 scikit-learn classifiers with cross-validation. Saves the best model as a pickle file.</li>
+					<li><strong>paths.py</strong> — Dual-path system: <code>APP_DIR</code> (read-only bundled assets) vs <code>USER_DATA_DIR</code> (writable user data).</li>
+				</ul>
+
+				<hr class="border-bdr my-12" />
+
+				<!-- 9. ML Pipeline -->
+				<h2 id="ml-pipeline" class="scroll-mt-28 flex items-center gap-3">
+					<span class="w-8 h-8 rounded-full bg-blue/20 text-blue flex items-center justify-center text-sm shrink-0">9</span>
+					ML Pipeline
+				</h2>
+				<p>The classification pipeline runs every frame (~30 FPS):</p>
+				<ol>
+					<li><strong>MediaPipe FaceMesh</strong> — Detects 478 3D facial landmarks including iris centers (landmarks 468–477).</li>
+					<li><strong>Feature Extraction</strong> — Computes 8 normalized gaze ratios from landmark coordinates.</li>
+					<li><strong>Classification</strong> — Feeds features to the active scikit-learn model. Outputs a zone label (TL/TM/TR/BL/BM/BR) + confidence.</li>
+					<li><strong>Majority-Vote Smoothing</strong> — Buffers the last N predictions (default 7) and outputs the majority vote, requiring ≥50% agreement.</li>
+					<li><strong>Confidence Gating</strong> — Only predictions with confidence ≥ threshold (default 0.40) are accepted.</li>
+				</ol>
+				<h4 class="">Model Performance (10-fold CV):</h4>
+				<div class="glass p-4 rounded-xl  my-4 font-mono text-sm">
+					<table class="w-full text-left">
+						<thead><tr class="border-b border-bdr"><th class="py-2">Model</th><th>Accuracy</th><th>Type</th></tr></thead>
+						<tbody>
+							<tr><td class="py-1 text-green font-bold">MLP</td><td class="text-brand-green">97.25%</td><td>Neural Network</td></tr>
+							<tr><td class="py-1">SVM</td><td>96.68%</td><td>Support Vector Machine</td></tr>
+							<tr><td class="py-1">KNN</td><td>96.51%</td><td>K-Nearest Neighbors</td></tr>
+							<tr><td class="py-1">RF</td><td>95.37%</td><td>Random Forest</td></tr>
+							<tr><td class="py-1">GB</td><td>94.95%</td><td>Gradient Boosting</td></tr>
+						</tbody>
+					</table>
+				</div>
+				<p>Base dataset: <strong>4,040 samples</strong> collected from multiple participants.</p>
+
+				<hr class="border-bdr my-12" />
+
+				<!-- 10. Feature Engineering -->
+				<h2 id="features" class="scroll-mt-28 flex items-center gap-3">
+					<span class="w-8 h-8 rounded-full bg-blue/20 text-blue flex items-center justify-center text-sm shrink-0">10</span>
+					Feature Engineering
+				</h2>
+				<p>8 features are extracted per frame from MediaPipe iris and eye landmarks:</p>
+				<div class="glass p-4 rounded-xl  my-4 font-mono text-sm overflow-x-auto">
+					<table class="w-full text-left">
+						<thead><tr class="border-b border-bdr"><th class="py-2">#</th><th>Feature</th><th>Description</th></tr></thead>
+						<tbody>
+							<tr><td class="py-1">1–2</td><td>left_iris_x/y</td><td>Normalized iris center position (left eye)</td></tr>
+							<tr><td class="py-1">3–4</td><td>right_iris_x/y</td><td>Normalized iris center position (right eye)</td></tr>
+							<tr><td class="py-1">5</td><td>left_h_ratio</td><td>Horizontal ratio of iris within eye boundaries</td></tr>
+							<tr><td class="py-1">6</td><td>right_h_ratio</td><td>Horizontal ratio of iris within eye boundaries</td></tr>
+							<tr><td class="py-1">7</td><td>left_v_ratio</td><td>Vertical ratio of iris within eye boundaries</td></tr>
+							<tr><td class="py-1">8</td><td>right_v_ratio</td><td>Vertical ratio of iris within eye boundaries</td></tr>
+						</tbody>
+					</table>
+				</div>
+				<p><strong>Key insight:</strong> Vertical ratios (features 7–8) carry ~70% of the total feature importance. This makes sense because vertical eye movement has the strongest correlation with the 2-row zone layout.</p>
+				<p>All features are normalized relative to eye bounding box dimensions, making the system resolution-independent and robust across different cameras and face distances.</p>
+
+			</div>
+		</div>
+	</div>
+</Layout>
