@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="favicon.png" alt="OptiType Logo" width="120" height="120" style="border-radius: 20px;">
+  <img src="public/favicon.png" alt="OptiType Logo" width="120" height="120" style="border-radius: 20px;">
 </p>
 
 <h1 align="center">OptiType — ML-Powered Eye Tracking Typing System</h1>
@@ -7,6 +7,14 @@
 <p align="center">
   <strong>Type with your eyes using any standard webcam — free, offline, and open-source.</strong>
 </p>
+
+<div align="center">
+  <a href="https://astro.build/"><img src="https://img.shields.io/badge/Astro-6.0+-ff5a03?style=for-the-badge&logo=astro&logoColor=white" alt="Astro"></a>
+  <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-3.4+-38bdf8?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind"></a>
+  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.0+-3178c6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"></a>
+  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-22.0+-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js"></a>
+</div>
+<br>
 
 <p align="center">
   <a href="https://mohamed-alzarzour.github.io/OptiType-Website/en/">🌐 Live Website</a> ·
