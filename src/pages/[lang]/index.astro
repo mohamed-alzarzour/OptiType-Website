@@ -32,11 +32,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 				{t('hero.desc')}
 			</p>
 			<div class="a-up-3 flex flex-wrap gap-4">
-				<a href={`/${lang}/download`} class="group px-7 py-4 bg-gradient-to-r from-blue to-green text-white rounded-2xl font-bold transition-all duration-300 hover:shadow-[0_8px_40px_rgba(24,160,248,0.35)] hover:-translate-y-1 flex items-center gap-2">
+				<a href={`${base}/${lang}/download`} class="group px-7 py-4 bg-gradient-to-r from-blue to-green text-white rounded-2xl font-bold transition-all duration-300 hover:shadow-[0_8px_40px_rgba(24,160,248,0.35)] hover:-translate-y-1 flex items-center gap-2">
 					{t('hero.cta')}
 					<svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
 				</a>
-				<a href={`/${lang}/docs`} class="px-7 py-4 glass rounded-2xl font-bold transition-all duration-300 hover:-translate-y-1" style="color:var(--c-text)">{t('hero.docs')}</a>
+				<a href={`${base}/${lang}/docs`} class="px-7 py-4 glass rounded-2xl font-bold transition-all duration-300 hover:-translate-y-1" style="color:var(--c-text)">{t('hero.docs')}</a>
 			</div>
 		</div>
 
@@ -215,8 +215,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 			<div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style="background:linear-gradient(135deg,rgba(24,160,248,0.05),rgba(65,207,110,0.05))"></div>
 			<h2 class="text-3xl md:text-4xl font-black mb-4 relative z-10" style="color:var(--c-text)">{t('cta.title')}</h2>
 			<p class="mb-10 max-w-md mx-auto relative z-10" style="color:var(--c-text2)">{t('cta.desc')}</p>
-			<a href={`/${lang}/download`} class="relative z-10 inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue to-green text-white rounded-2xl font-bold hover:shadow-[0_8px_40px_rgba(24,160,248,0.35)] hover:-translate-y-1 transition-all duration-300">
-				Get Started <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+			<a href={`${base}/${lang}/download`} class="relative z-10 inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue to-green text-white rounded-2xl font-bold hover:shadow-[0_8px_40px_rgba(24,160,248,0.35)] hover:-translate-y-1 transition-all duration-300">
+				{t('cta.btn')} <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
 			</a>
 		</div>
 	</div>
